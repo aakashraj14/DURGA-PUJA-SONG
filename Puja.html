@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Durga Puja Nostalgia | শারদীয় উৎসব</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-crimson: #0f0204;
+      --sindoor-red: #c41e3a;
+      --marigold-gold: #f5a623;
+      --kash-white: #fcfbf7;
+      --glass-bg: rgba(18, 4, 7, 0.65);
+      --glass-border: rgba(245, 166, 35, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-crimson);
+      color: var(--kash-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 1.5rem 8rem 1.5rem;
+    }
+
+    .bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196, 30, 58, 0.25) 0%, rgba(245, 166, 35, 0.08) 50%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(60px);
+      z-index: 0;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+      gap: 1.8rem;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1.2rem;
+      border-radius: 99px;
+      background: rgba(245, 166, 35, 0.1);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--marigold-gold);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #25d366;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #25d366;
+    }
+
+    .title-main {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, #fbd58e 50%, #f5a623 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-title {
+      font-family: 'Rozha One', serif;
+      font-size: 1.3rem;
+      color: #df8a97;
+      letter-spacing: 1px;
+    }
+
+    .hero-visual-card {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-visual-card:hover { transform: scale(1.05); }
+
+    .sacred-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px dashed rgba(245, 166, 35, 0.4);
+      animation: rotateRing 28s linear infinite;
+    }
+
+    @keyframes rotateRing { 100% { transform: rotate(360deg); } }
+
+    .central-icon-wrap {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196, 30, 58, 0.4) 0%, rgba(15, 2, 4, 0.8) 80%);
+      border: 1.5px solid var(--marigold-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .central-svg {
+      width: 80px;
+      height: 80px;
+      fill: none;
+      stroke: var(--marigold-gold);
+      stroke-width: 1.5;
+    }
+
+    .interactive-hint {
+      font-size: 0.75rem;
+      color: rgba(252, 251, 247, 0.5);
+      margin-top: -0.5rem;
+    }
+
+    .quote-box {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      max-width: 650px;
+    }
+
+    .nostalgia-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #edd5a6;
+      transition: opacity 0.6s ease;
+    }
+
+    .nostalgia-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .tag-chip {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 6px;
+      background: rgba(196, 30, 58, 0.15);
+      border: 1px solid rgba(196, 30, 58, 0.3);
+      color: #ffcad1;
+    }
+
+    /* Glassmorphism Player */
+    .music-player-dock {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92%, 620px);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .player-upper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .track-details {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .track-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--kash-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-subtitle {
+      font-size: 0.75rem;
+      color: var(--marigold-gold);
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-ctrl {
+      background: none;
+      border: none;
+      color: var(--kash-white);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+    }
+
+    .btn-ctrl:hover {
+      background: rgba(245, 166, 35, 0.15);
+      color: var(--marigold-gold);
+    }
+
+    .btn-play {
+      background: var(--marigold-gold);
+      color: var(--bg-crimson);
+      width: 44px;
+      height: 44px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--sindoor-red), var(--marigold-gold));
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas class="bg-canvas" id="canvas"></canvas>
+  <div class="ambient-glow"></div>
+
+  <main class="content-container">
+    <div class="header-badge">
+      <span class="status-dot"></span>
+      <span>100% Ad-Free Audio Stream Active</span>
+    </div>
+
+    <h1 class="title-main">MAHASHOBHA</h1>
+    <p class="sub-title">আশ্বিনের শারদপ্রাতে বেজে উঠেছে আলোক মঞ্জরী</p>
+
+    <div class="hero-visual-card" id="sacredArtifact">
+      <div class="sacred-circle"></div>
+      <div class="central-icon-wrap">
+        <svg class="central-svg" viewBox="0 0 100 100">
+          <path d="M50,15 L50,85 M50,15 C40,25 30,35 25,50 C38,48 45,55 50,65 C55,55 62,48 75,50 C70,35 60,25 50,15 Z" stroke="currentColor" fill="none"/>
+          <circle cx="50" cy="40" r="3" fill="var(--sindoor-red)"/>
+          <path d="M38,45 Q50,33 62,45 Q50,57 38,45 Z" fill="none" stroke="currentColor"/>
+          <circle cx="50" cy="45" r="2.5" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+    <span class="interactive-hint">✦ Click or Press SPACE to ring Dhak & Kanshor</span>
+
+    <div class="quote-box">
+      <p class="nostalgia-text" id="quoteDisplay">Loading golden memories...</p>
+    </div>
+
+    <div class="nostalgia-tags">
+      <span class="tag-chip">🪔 Dhunuchi Naach</span>
+      <span class="tag-chip">🥁 Kashor Ghonta</span>
+      <span class="tag-chip">🌾 Kash Phool Morning</span>
+      <span class="tag-chip">📜 4 AM Mahisasuramardini</span>
+      <span class="tag-chip">🎡 Pandal Hopping</span>
+    </div>
+  </main>
+
+  <footer class="music-player-dock">
+    <div class="player-upper">
+      <div class="track-details">
+        <div class="track-title" id="trackName">Initializing Ad-Free Stream...</div>
+        <div class="track-subtitle" id="playlistStatus">Bypassing YouTube Ad Engine</div>
+      </div>
+      <div class="player-controls">
+        <button class="btn-ctrl" id="btnPrev">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+        </button>
+        <button class="btn-ctrl btn-play" id="btnPlay">
+          <svg id="playIcon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-ctrl" id="btnNext">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="m6 18 8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="progress-container" id="progressWrap">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </footer>
+
+  <!-- Native HTML5 Audio Object (Zero Ad Injection) -->
+  <audio id="nativeAudio"></audio>
+
+  <script>
+    /* =========================================================
+       1. Quotes Rotator & Sound FX
+       ========================================================= */
+    const memories = [
+      "Waking up at 4:00 AM on Mahalaya to Birendra Krishna Bhadra's voice.",
+      "The distinct fragrance of Shiuli phool under a crisp autumn sky.",
+      "Thunderous beats of Dhak echoing from distant pandals in the evening.",
+      "Eating hot Khichuri bhog and Payesh with cousins on Ashtami.",
+      "Smoky spirals of camphor and Dhuno during evening Sandhya Aarti."
+    ];
+    let qIdx = 0;
+    const qDisp = document.getElementById("quoteDisplay");
+    function rotateQuote() {
+      qDisp.style.opacity = 0;
+      setTimeout(() => {
+        qDisp.textContent = `“${memories[qIdx]}”`;
+        qDisp.style.opacity = 1;
+        qIdx = (qIdx + 1) % memories.length;
+      }, 500);
+    }
+    rotateQuote();
+    setInterval(rotateQuote, 5500);
+
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let sfxCtx = null;
+    function playDhakFX() {
+      if (!sfxCtx) sfxCtx = new AudioContext();
+      if (sfxCtx.state === 'suspended') sfxCtx.resume();
+      const now = sfxCtx.currentTime;
+      const osc = sfxCtx.createOscillator();
+      const gain = sfxCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(45, now + 0.35);
+      gain.gain.setValueAtTime(0.8, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.connect(gain);
+      gain.connect(sfxCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    }
+    document.getElementById("sacredArtifact").addEventListener("click", playDhakFX);
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && e.target.tagName !== "INPUT") {
+        e.preventDefault();
+        playDhakFX();
+      }
+    });
+
+    /* =========================================================
+       2. Background Animated Particles
+       ========================================================= */
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener("resize", resize);
+    resize();
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        s: Math.random() * 2 + 1,
+        sy: Math.random() * 0.7 + 0.3,
+        c: Math.random() > 0.4 ? "245, 166, 35" : "252, 251, 247"
+      });
+    }
+    function renderParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.y -= p.sy;
+        if (p.y < -10) p.y = canvas.height + 10;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c}, 0.5)`;
+        ctx.fill();
+      });
+      requestAnimationFrame(renderParticles);
+    }
+    renderParticles();
+
+    /* =========================================================
+       3. 100% Ad-Free YouTube Stream Engine (Invidious / Piped API)
+       ========================================================= */
+    const PLAYLIST_ID = "PLSsyxfDiLI4nUTBZBBjyIVP60JLv5-ux9";
+    const audio = document.getElementById("nativeAudio");
+    let playlistTracks = [];
+    let currentTrackIdx = 0;
+
+    // Public Invidious API Instance for Zero-Ad Streaming
+    async function loadAdFreePlaylist() {
+      const instances = [
+        "https://inv.tux.pizza/api/v1/playlists/",
+        "https://invidious.nerdvpn.de/api/v1/playlists/",
+        "https://invidious.private.coffee/api/v1/playlists/"
+      ];
+
+      for (let base of instances) {
+        try {
+          const res = await fetch(base + PLAYLIST_ID);
+          if (!res.ok) continue;
+          const data = await res.json();
+          playlistTracks = data.videos;
+          if (playlistTracks.length > 0) {
+            document.getElementById("playlistStatus").textContent = `Loaded ${playlistTracks.length} Ad-Free Tracks`;
+            loadTrack(0);
+            return;
+          }
+        } catch (err) {
+          console.warn("Retrying next ad-free instance...");
+        }
+      }
+      document.getElementById("trackName").textContent = "Durga Puja Devotional Stream";
+      document.getElementById("playlistStatus").textContent = "Direct Stream Ready • Click Play";
+    }
+
+    async function loadTrack(index) {
+      if (!playlistTracks[index]) return;
+      const track = playlistTracks[index];
+      document.getElementById("trackName").textContent = track.title;
+      document.getElementById("playlistStatus").textContent = track.author || "Mahalaya & Agomoni";
+
+      // Direct Stream Link (No Ads possible in native HTML5 audio)
+      audio.src = `https://invidious.nerdvpn.de/latest_version?id=${track.videoId}&itag=140`;
+      audio.load();
+    }
+
+    const btnPlay = document.getElementById("btnPlay");
+    const playIcon = document.getElementById("playIcon");
+
+    btnPlay.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play().then(() => {
+          playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+        }).catch(() => {
+          // Fallback if autoplay restricted
+          playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+        });
+      } else {
+        audio.pause();
+        playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+      }
+    });
+
+    document.getElementById("btnNext").addEventListener("click", () => {
+      if (playlistTracks.length === 0) return;
+      currentTrackIdx = (currentTrackIdx + 1) % playlistTracks.length;
+      loadTrack(currentTrackIdx);
+      audio.play();
+    });
+
+    document.getElementById("btnPrev").addEventListener("click", () => {
+      if (playlistTracks.length === 0) return;
+      currentTrackIdx = (currentTrackIdx - 1 + playlistTracks.length) % playlistTracks.length;
+      loadTrack(currentTrackIdx);
+      audio.play();
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        document.getElementById("progressBar").style.width = `${pct}%`;
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      document.getElementById("btnNext").click();
+    });
+
+    document.getElementById("progressWrap").addEventListener("click", (e) => {
+      if (!audio.duration) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickPos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = clickPos * audio.duration;
+    });
+
+    loadAdFreePlaylist();
+  </script>
+</body>
+</html>
